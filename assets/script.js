@@ -9,10 +9,10 @@ var typewriter = new Typewriter(app, {
 typewriter.typeString('Olá, tudo bem, como posso te ajudar hoje?')
     .start();
 
-
 const API_KEY = "AIzaSyDsE6K5NDNRTDGxX2xlyppT0fesCbjuxZs";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const chat = model.startChat();
 
 function highlightCode(text) {
   const lines = text.split("```");
@@ -34,14 +34,23 @@ document.getElementById('enviar').addEventListener('click', async () => {
   const prompt = document.getElementById('prompt').value;
   document.getElementById('prompt').value = '';
 
+  app.innerHTML += `
+    <span class="text-user" style="background-color: red;">${prompt}</span><br><br>
+  `;
+
   try {
-    const result = await model.generateContent(prompt);
+    const result = await chat.sendMessageStream(prompt);
     const response = await result.response;
     let text = response.text();
 
-    text = highlightCode(text); 
+    text = highlightCode(text);
+    
+    for await (const chunk of result.stream) {
+      const chunkText = chunk.text();
+      text += chunkText;
+      app.innerHTML += text;
+    }
 
-    app.innerHTML = text;
 
   } catch (error) {
     console.error("Erro na solicitação:", error);

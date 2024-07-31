@@ -44,6 +44,10 @@ button:hover {
   cursor: pointer;
 }
 
+.text-user {
+  margin: 1rem;
+}
+
 .material-symbols-outlined {
   color: rgb(136, 136, 136);
 }
