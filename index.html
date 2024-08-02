@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/style.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
     <title>Document</title>
     <link rel="stylesheet" href="./assets/atom-one-dark.css" />
+    <link rel="stylesheet" href="assets/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/markdown.js/0.5.0/markdown.min.js"
@@ -21,7 +21,8 @@
     <script type="importmap">
       {
         "imports": {
-          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          "@google/generative-ai": "https://esm.run/@google/generative-ai",
+          "dotenv": "https://cdn.jsdelivr.net/npm/dotenv@16.4.5/+esm"
         }
       }
     </script>
@@ -39,7 +40,9 @@
             placeholder="Dite seu prompt..."
           ></textarea>
           <button type="submit" id="enviar">
-            <span class="material-symbols-outlined"> start </span>
+            <span style="font-size: 2.5rem; text-align: center;" class="material-symbols-outlined">
+              play_arrow
+              </span>
           </button>
         </div>
       </div>
