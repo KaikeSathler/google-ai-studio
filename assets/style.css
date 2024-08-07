@@ -45,7 +45,7 @@ button:hover {
 }
 
 .text-user {
-  padding: 1rem;
+  padding: 0.70rem;
   background-color: rgb(255, 255, 255);
   border-radius: 0.512em;
   display: flex;

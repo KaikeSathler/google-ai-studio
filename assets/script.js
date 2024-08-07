@@ -1,13 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-let json = undefined;
+// let json = undefined;
 
-await fetch("../config.json").then(async (data) => {
-  json = await data.json();
-});
+// await fetch("../config.json").then(async (data) => {
+//   json = await data.json();
+// });
 
 var app = document.getElementById('ia');
 
-const API_KEY = json.API_KEY;
+const API_KEY = "AIzaSyDsE6K5NDNRTDGxX2xlyppT0fesCbjuxZs";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const chat = model.startChat();
