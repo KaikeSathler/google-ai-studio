@@ -10,11 +10,22 @@ body {
   background-color: gainsboro;
 }
 
+textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgb(112, 112, 112);    
+  border-radius: 1rem;  
+  padding: 1rem;     
+  border: 2px solid rgb(255, 255, 255); 
+  cursor: pointer;
+}
+
 textarea {
   resize: none;
-  border-radius: 0.75rem;
-  background-color: rgb(255, 255, 255);
-  padding: 18px 10px 18px 10px;
+  border-radius: 1rem 0rem 0rem 1rem;
+  padding: 15px 10px 16px 10px;
   border: 1px solid rgb(202, 202, 202);
   color: rgb(48, 48, 48);
   font-size: medium;
@@ -33,9 +44,8 @@ section {
 }
 
 button {
-  padding: 0.3rem;
   border: 1px solid rgb(202, 202, 202);
-  border-radius: 1.6rem;
+  border-radius: 50%;
   background-color: white;
 }
 
@@ -74,11 +84,14 @@ button:hover {
   border-radius: 0.5rem;
 }
 
-.prompt {
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+#token-count {
+  color: rgba(48, 48, 48, 0.603);
+  margin: 0.5rem;
+}
+
+.prompt_control {
   display: flex;
+  flex-direction: row;
   gap: 1rem;
 }
 
