@@ -65,13 +65,14 @@ button:hover {
   background-color: rgb(255, 255, 255);
   border-radius: 0.512em;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; 
 }
 
 .text-user span {
   background-color: #dfdfdf;
   padding: 1rem;
   border-radius: 10px 0 20px 10px;
+  text-align: justify;
 }
 
 .material-symbols-outlined {
@@ -104,6 +105,7 @@ button:hover {
 #ia {
   margin: 1rem;
   color: rgb(48, 48, 48);
+  word-wrap:break-word
 }
 
 pre {

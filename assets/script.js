@@ -4,7 +4,7 @@ var app = document.getElementById('ia');
 
 const chatbotConfig = {
   generationConfig: {
-    stopSequences: ["red", "blue"],
+    stopSequences: ["red"],
     maxOutputTokens: 200,
     temperature: 0.9,
     topP: 0.1,
@@ -47,25 +47,10 @@ function highlightCode(text) {
   return html;
 }
 
-let mensagemLimiteExibida = false;
-
 async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
   console.log(`Total de tokens: ${totalTokens}`);
   tokenElement.innerHTML = `Tokens: ${totalTokens}/200`;
-
-  if (totalTokens >= 200 && !mensagemLimiteExibida) {
-    tokenElement.classList.add('animate-warning');
-    tokenElement.style.color = "red";
-    tokenElement.innerHTML = `Tokens: ${totalTokens}/200 *Total de token atingido, o próximo prompt reiniciará o token`;
-    mensagemLimiteExibida = true;
-    document.getElementById('prompt').value = '';
-
-    setTimeout(() => {
-      tokenElement.classList.add().innerHTML = `Tokens: ${totalTokens}/200`;
-      tokenElement.style.color = '';
-    }, 3000);
-  }
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
