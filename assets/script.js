@@ -2,9 +2,19 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 var app = document.getElementById('ia');
 
+const chatbotConfig = {
+  generationConfig: {
+    stopSequences: ["red", "blue"],
+    maxOutputTokens: 200,
+    temperature: 0.9,
+    topP: 0.1,
+    topK: 16,
+  },
+};
+
 const API_KEY = "AIzaSyDsE6K5NDNRTDGxX2xlyppT0fesCbjuxZs";
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig: chatbotConfig.generationConfig });
 const chat = model.startChat();
 const fraseAtual = "Olá, como eu posso de ajudar?";
 const tokenElement = document.getElementById('token-count');
@@ -17,6 +27,7 @@ const typewriter = new Typewriter(elemento, {
   cursor: "",
   delay: 1,
 });
+
 
 typewriter
   .typeString(fraseAtual)
@@ -36,10 +47,25 @@ function highlightCode(text) {
   return html;
 }
 
+let mensagemLimiteExibida = false;
+
 async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
   console.log(`Total de tokens: ${totalTokens}`);
-  tokenElement.innerText = `Tokens: ${totalTokens}`;
+  tokenElement.innerHTML = `Tokens: ${totalTokens}/200`;
+
+  if (totalTokens >= 200 && !mensagemLimiteExibida) {
+    tokenElement.classList.add('animate-warning');
+    tokenElement.style.color = "red";
+    tokenElement.innerHTML = `Tokens: ${totalTokens}/200 *Total de token atingido, o próximo prompt reiniciará o token`;
+    mensagemLimiteExibida = true;
+    document.getElementById('prompt').value = '';
+
+    setTimeout(() => {
+      tokenElement.classList.add().innerHTML = `Tokens: ${totalTokens}/200`;
+      tokenElement.style.color = '';
+    }, 3000);
+  }
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
