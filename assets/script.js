@@ -1,20 +1,25 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
 var app = document.getElementById('ia');
 
-const chatbotConfig = {
-  generationConfig: {
-    stopSequences: ["red"],
-    maxOutputTokens: 200,
-    temperature: 0.9,
-    topP: 0.1,
-    topK: 16,
+const safetySettings = [
+  {
+    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
   },
+];
+
+const chatbotConfig = {
+    maxOutputTokens: 8000,
+    temperature: 0.9,
+    topP: 0.95,
+    topK: 60,
 };
 
-const API_KEY = "AIzaSyDsE6K5NDNRTDGxX2xlyppT0fesCbjuxZs";
+const API_KEY = "AIzaSyC9Ue8l3aXORQGNKrq19f59rClI5GG61xY";
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig: chatbotConfig.generationConfig });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", chatbotConfig, safetySettings });
 const chat = model.startChat();
 const fraseAtual = "Olá, como eu posso de ajudar?";
 const tokenElement = document.getElementById('token-count');
@@ -50,7 +55,7 @@ function highlightCode(text) {
 async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
   console.log(`Total de tokens: ${totalTokens}`);
-  tokenElement.innerHTML = `Tokens: ${totalTokens}/200`;
+  tokenElement.innerHTML = `Tokens: ${totalTokens}/8000`;
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
