@@ -25,7 +25,7 @@ app.insertAdjacentElement("beforeend", elemento);
 
 const typewriter = new Typewriter(elemento, {
   cursor: "",
-  delay: 1,
+  delay: 20,
 });
 
 
@@ -60,9 +60,9 @@ document.getElementById('enviar').addEventListener('click', async () => {
   }
 
   document.getElementById('prompt').value = '';
-
+  
   app.innerHTML += `
-    <div class="text-user"><span>${prompt}</span></div>
+    <div class="text-user"><div class="text-user-content"><span>${prompt}</span></div></div>
   `;
 
   try {

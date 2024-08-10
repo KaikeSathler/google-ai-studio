@@ -38,6 +38,7 @@ textarea {
   width: 100%;
 }
 
+
 textarea:focus, button:focus {
   outline: none;
 }
@@ -53,26 +54,43 @@ button {
   border: 1px solid rgb(202, 202, 202);
   border-radius: 50%;
   background-color: white;
+  transition: all ease-in 100ms;
+  padding: 0;
 }
 
 button:hover {
-  background-color: rgb(214, 214, 214);
+  background-color: rgb(191, 230, 203);
   cursor: pointer;
+  border-color: rgb(191, 230, 203);
+  
+}
+
+button span {
+  padding: 0.5rem;
+}
+
+button span:hover {
+  color: rgb(114, 160, 127);
 }
 
 .text-user {
-  padding: 0.70rem;
-  background-color: rgb(255, 255, 255);
-  border-radius: 0.512em;
+  width: 100%;
+  justify-content: flex-end;
   display: flex;
-  justify-content: flex-end; 
+  padding: 0.75rem;
+  padding-right: 0;
 }
 
-.text-user span {
-  background-color: #dfdfdf;
-  padding: 1rem;
+.text-user-content {
+  padding: 0.70rem;
+  background-color: rgb(214, 214, 214);
+  overflow: auto;
   border-radius: 10px 0 20px 10px;
-  text-align: justify;
+}
+
+.text-user-content span {
+  max-width: 100%; 
+  word-wrap: break-word; 
 }
 
 .material-symbols-outlined {
@@ -96,6 +114,8 @@ button:hover {
   margin: 0.5rem;
 }
 
+
+
 .prompt_control {
   display: flex;
   flex-direction: row;
@@ -103,9 +123,9 @@ button:hover {
 }
 
 #ia {
-  margin: 1rem;
   color: rgb(48, 48, 48);
-  word-wrap:break-word
+  word-wrap:break-word;
+  margin: 1rem;
 }
 
 pre {
