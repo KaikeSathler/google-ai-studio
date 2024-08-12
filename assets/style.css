@@ -168,3 +168,15 @@ p {
 .animate-warning {
   transition: all ease-in 500ms;
 }
+
+@media screen and (max-width: 668px) {
+  .section-content {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  span, pre, code {
+    font-size: small;
+  }
+
+}
