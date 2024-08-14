@@ -19,7 +19,7 @@ const chatbotConfig = {
 
 const API_KEY = "AIzaSyC9Ue8l3aXORQGNKrq19f59rClI5GG61xY";
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", chatbotConfig, safetySettings });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", chatbotConfig, safetySettings, system_instruction:"Chat, você é um profissional na programação. Linguagens a serem consideradas, HTML, CSSPython, JavaScript, Java, C++, C#, PHP, Ruby, Swift, Go, Kotlin e outras focadas em Web. O modelo deve ser capaz de gerar código para diferentes tipos de aplicações, desde aplicações web até sistemas de desktop e mobile. É essencial ter um dataset grande e diversificado de código para cada linguagem. Você pode utilizar repositórios de código como GitHub, GitLab e Bitbucket, além de código de projetos open-source. Gere código de alta qualidade para todas essas linguagens exige um dataset massivo e uma arquitetura complexa, capaz de lidar com as diferentes nuances sintáticas e semânticas de cada linguagem.",});
 const chat = model.startChat();
 const fraseAtual = "Olá, como eu posso de ajudar?";
 const tokenElement = document.getElementById('token-count');
