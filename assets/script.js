@@ -2,6 +2,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
 var app = document.getElementById('ia');
+let tokenCount = 0; // Adicionei essa variável para armazenar o contador de tokens
+let isTokenLimitReached = false; // Adicionei essa variável para indicar se o limite de tokens foi alcançado
 
 const safetySettings = [
   {
@@ -11,15 +13,15 @@ const safetySettings = [
 ];
 
 const chatbotConfig = {
-    maxOutputTokens: 8000,
-    temperature: 0.9,
-    topP: 0.95,
-    topK: 60,
+  maxOutputTokens: 8000,
+  temperature: 0.9,
+  topP: 0.95,
+  topK: 60,
 };
 
 const API_KEY = "AIzaSyC9Ue8l3aXORQGNKrq19f59rClI5GG61xY";
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", chatbotConfig, safetySettings, system_instruction:"Você é um profissional na programação. Linguagens a serem consideradas, HTML, CSSPython, JavaScript, Java, C++, C#, PHP, Ruby, Swift, Go, Kotlin e outras focadas em Web. O modelo deve ser capaz de gerar código para diferentes tipos de aplicações, desde aplicações web até sistemas de desktop e mobile. É essencial ter um dataset grande e diversificado de código para cada linguagem. Você pode utilizar repositórios de código como GitHub, GitLab e Bitbucket, além de código de projetos open-source. Gere código de alta qualidade para todas essas linguagens exige um dataset massivo e uma arquitetura complexa, capaz de lidar com as diferentes nuances sintáticas e semânticas de cada linguagem.",});
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", chatbotConfig, safetySettings, system_instruction:"Você é especializado em programação. Linguagens a serem consideradas, HTML, CSS, Python, JavaScript, Java, C++, C#, PHP, Ruby, Swift, Go, Kotlin e outras focadas em Web. O modelo deve ser capaz de gerar código para diferentes tipos de aplicações, desde aplicações web até sistemas de desktop e mobile. É essencial ter um dataset grande e diversificado de código para cada linguagem. Você pode utilizar repositórios de código como GitHub, GitLab e Bitbucket, além de código de projetos open-source. Gere código de alta qualidade para todas essas linguagens exige um dataset massivo e uma arquitetura complexa, capaz de lidar com as diferentes nuances sintáticas e semânticas de cada linguagem.",});
 const chat = model.startChat();
 const fraseAtual = "Olá, como eu posso de ajudar?";
 const tokenElement = document.getElementById('token-count');
@@ -32,7 +34,6 @@ const typewriter = new Typewriter(elemento, {
   cursor: "",
   delay: 20,
 });
-
 
 typewriter
   .typeString(fraseAtual)
@@ -54,8 +55,27 @@ function highlightCode(text) {
 
 async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
-  console.log(`Total de tokens: ${totalTokens}`);
-  tokenElement.innerHTML = `Tokens: ${totalTokens}/8000`;
+  tokenCount += totalTokens;
+  console.log(`Total de tokens: ${tokenCount}`);
+  tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
+
+  if (tokenCount >= chatbotConfig.maxOutputTokens) {
+    isTokenLimitReached = true;
+    showTokenLimitReachedMessage();
+  }
+}
+
+function showTokenLimitReachedMessage() {
+  const warningElement = document.createElement("div");
+  warningElement.style.color = "red";
+  warningElement.innerHTML = "Você alcançou o limite de tokens. Por favor, aguarde um momento antes de enviar outra mensagem.";
+  app.insertAdjacentElement("beforeend", warningElement);
+
+  // Resetar o prompt após 10 segundos
+  setTimeout(() => {
+    document.getElementById('prompt').value = '';
+    isTokenLimitReached = false;
+  }, 10000);
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
@@ -64,8 +84,13 @@ document.getElementById('enviar').addEventListener('click', async () => {
     return;
   }
 
+  if (isTokenLimitReached) {
+    alert("Você alcançou o limite de tokens. Por favor, aguarde um momento antes de enviar outra mensagem.");
+    return;
+  }
+
   document.getElementById('prompt').value = '';
-  
+
   app.innerHTML += `
     <div class="text-user"><div class="text-user-content"><span>${prompt}</span></div></div>
   `;
@@ -78,12 +103,4 @@ document.getElementById('enviar').addEventListener('click', async () => {
     app.insertAdjacentElement("beforeend", span);
 
     for await (const chunk of result.stream) {
-      console.log(chunk.text())
-      resposta += chunk.text()
-      span.innerHTML = highlightCode(resposta);
-    }
-
-  } catch (error) {
-    console.error("Erro na solicitação:", error);
-  }
-});
+      console.log(chunk
