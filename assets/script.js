@@ -3,7 +3,6 @@ import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
 var app = document.getElementById('ia');
 let tokenCount = 0; // Adicionei essa variável para armazenar o contador de tokens
-let isTokenLimitReached = false; // Adicionei essa variável para indicar se o limite de tokens foi alcançado
 
 const safetySettings = [
   {
@@ -58,24 +57,6 @@ async function contarTokens(prompt) {
   tokenCount += totalTokens;
   console.log(`Total de tokens: ${tokenCount}`);
   tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
-
-  if (tokenCount >= chatbotConfig.maxOutputTokens) {
-    isTokenLimitReached = true;
-    showTokenLimitReachedMessage();
-  }
-}
-
-function showTokenLimitReachedMessage() {
-  const warningElement = document.createElement("div");
-  warningElement.style.color = "red";
-  warningElement.innerHTML = "Você alcançou o limite de tokens. Por favor, aguarde um momento antes de enviar outra mensagem.";
-  app.insertAdjacentElement("beforeend", warningElement);
-
-  // Resetar o prompt após 10 segundos
-  setTimeout(() => {
-    document.getElementById('prompt').value = '';
-    isTokenLimitReached = false;
-  }, 10000);
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
@@ -84,7 +65,7 @@ document.getElementById('enviar').addEventListener('click', async () => {
     return;
   }
 
-  if (isTokenLimitReached) {
+  if (tokenCount >= chatbotConfig.maxOutputTokens) {
     alert("Você alcançou o limite de tokens. Por favor, aguarde um momento antes de enviar outra mensagem.");
     return;
   }
@@ -103,4 +84,19 @@ document.getElementById('enviar').addEventListener('click', async () => {
     app.insertAdjacentElement("beforeend", span);
 
     for await (const chunk of result.stream) {
-      console.log(chunk
+      console.log(chunk.text())
+      resposta += chunk.text()
+      span.innerHTML = highlightCode(resposta);
+    }
+
+  } catch (error) {
+    console.error("Erro na solicitação:", error);
+  }
+});
+
+// Resetar o contador de tokens quando o usuário tenta enviar uma mensagem após alcançar o limite
+document.getElementById('prompt').addEventListener('input', () => {
+  if (tokenCount >= chatbotConfig.maxOutputTokens) {
+    tokenCount = 0;
+  }
+});
