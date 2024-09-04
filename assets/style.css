@@ -10,12 +10,12 @@ body {
   background-color: gainsboro;
 }
 
-textarea::-webkit-scrollbar {
+textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar {
   width: 12px;
 }
 
-textarea::-webkit-scrollbar-thumb {
-  background-color: rgb(112, 112, 112);    
+textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar-thumb {
+  background-color: rgb(189, 189, 189);    
   border-radius: 1rem;  
   padding: 1rem;     
   border: 2px solid rgb(255, 255, 255); 

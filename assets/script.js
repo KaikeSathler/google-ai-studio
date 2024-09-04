@@ -8,7 +8,6 @@ const promptElement = document.getElementById("prompt");
 const tokenElement = document.getElementById("token-count");
 
 promptElement.addEventListener("keyup", async function (e) {
-  // console.log(e.target.value)
   const { totalTokens } = await model.countTokens(e.target.value);
   tempTokenCount = tokenCount;
   tokenElement.innerHTML = `Tokens: ${totalTokens + tempTokenCount}/${
@@ -24,7 +23,7 @@ const safetySettings = [
 ];
 
 const chatbotConfig = {
-  maxOutputTokens: 8000,
+  maxOutputTokens: 80,
   temperature: 0.9,
   topP: 0.95,
   topK: 60,
@@ -37,7 +36,7 @@ const model = genAI.getGenerativeModel({
   chatbotConfig,
   safetySettings,
   system_instruction:
-    "Você é especializado em programação. Linguagens a serem consideradas, HTML, CSS, Python, JavaScript, Java, C++, C#, PHP, Ruby, Swift, Go, Kotlin e outras focadas em Web. O modelo deve ser capaz de gerar código para diferentes tipos de aplicações, desde aplicações web até sistemas de desktop e mobile. É essencial ter um dataset grande e diversificado de código para cada linguagem. Você pode utilizar repositórios de código como GitHub, GitLab e Bitbucket, além de código de projetos open-source. Gere código de alta qualidade para todas essas linguagens exige um dataset massivo e uma arquitetura complexa, capaz de lidar com as diferentes nuances sintáticas e semânticas de cada linguagem.",
+    "Chat, a partir de agora você é especialista na programação, você ira ajudar seus usuários a resolver problemas ou a criar projetos com base nas seguintes linguagens: HTML, CSS, Python, JavaScript, Java, C++, C#, PHP, Ruby, Swift, Go, Kotlin. Regras: Não responda nenhum conteúdo além da área programação. Foco: Você deve ser capaz de gerar código para diferentes tipos de aplicações, desde aplicações webs até sistemas de desktop e mobile. Treinamento: É essencial ter um dataset grande e diversificado de código para cada linguagem. Você pode utilizar repositórios de código como GitHub, GitLab e Bitbucket, além de código de projetos open-source. Dificuldades: Criar um modelo que gere código de alta qualidade para todas essas linguagens exige um dataset massivo e uma arquitetura complexa, capaz de lidar com as diferentes nuances sintáticas e semânticas de cada linguagem.",
 });
 const chat = model.startChat();
 const fraseAtual = "Olá, como eu posso de ajudar?";
@@ -73,7 +72,12 @@ async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
   tokenCount += totalTokens;
   console.log(`Total de tokens: ${tokenCount}`);
-  tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
+  if (tokenCount >= chatbotConfig.maxOutputTokens) {
+    tokenElement.style.color = 'red';
+    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens} (Limite máximo atingido!)`;
+  } else {
+    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
+  }
 }
 
 document.getElementById("enviar").addEventListener("click", async () => {

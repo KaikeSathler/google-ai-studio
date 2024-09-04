@@ -13,8 +13,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-const uri = "mongodb+srv://kaike:GsrQPjbSXQbhyPNu@cluster0.pz7sm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+const uri = "mongodb+srv://kaikesathler7:5udzOlxP9vAIGVav@cluster0.8eiqz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(uri);
 
 const tabelaMensagens = new mongoose.Schema({
