@@ -29,7 +29,7 @@ const chatbotConfig = {
   topK: 60,
 };
 
-const API_KEY = process.env.gemini_key;
+const API_KEY = "AIzaSyC9Ue8l3aXORQGNKrq19f59rClI5GG61xY";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
