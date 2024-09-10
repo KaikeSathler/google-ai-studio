@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
 var app = document.getElementById("ia");
-let tokenCount = 0; // Adicionei essa variável para armazenar o contador de tokens
+let tokenCount = 0;
 let tempTokenCount = 0;
 const promptElement = document.getElementById("prompt");
 const tokenElement = document.getElementById("token-count");
@@ -23,13 +23,13 @@ const safetySettings = [
 ];
 
 const chatbotConfig = {
-  maxOutputTokens: 80,
+  maxOutputTokens: 8000,
   temperature: 0.9,
   topP: 0.95,
   topK: 60,
 };
 
-const API_KEY = "AIzaSyC9Ue8l3aXORQGNKrq19f59rClI5GG61xY";
+const API_KEY = process.env.gemini_key;
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-flash",
@@ -74,7 +74,7 @@ async function contarTokens(prompt) {
   console.log(`Total de tokens: ${tokenCount}`);
   if (tokenCount >= chatbotConfig.maxOutputTokens) {
     tokenElement.style.color = 'red';
-    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens} (Limite máximo atingido!)`;
+    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens} * Limite máximo atingido!`;
   } else {
     tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
   }
@@ -90,7 +90,7 @@ document.getElementById("enviar").addEventListener("click", async () => {
 
   if (tokenCount >= chatbotConfig.maxOutputTokens) {
     alert(
-      "Você alcançou o limite de tokens. Por favor, aguarde um momento antes de enviar outra mensagem."
+      "Você alcançou o limite de tokens."
     );
     return;
   }
@@ -106,15 +106,16 @@ document.getElementById("enviar").addEventListener("click", async () => {
     const result = await chat.sendMessageStream(prompt);
     let span = document.createElement("div");
     app.insertAdjacentElement("beforeend", span);
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    const dataip = data.ip;
 
     for await (const chunk of result.stream) {
-      console.log(chunk.text());
       resposta += chunk.text();
       span.innerHTML = highlightCode(resposta);
       app.scrollTo(0, app.scrollHeight);
-      console.log(app.scrollHeight);
     }
-    console.log(resposta)
+    console.log(resposta);
     fetch('http://localhost:8003/api/message', {
       method: "POST",
       headers: {
@@ -122,7 +123,8 @@ document.getElementById("enviar").addEventListener("click", async () => {
       },
   
       body: JSON.stringify({
-        mensagem: resposta
+        mensagem: resposta,
+        usuario: dataip,
       }),
     })
   } catch (error) {
