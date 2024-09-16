@@ -28,6 +28,21 @@ textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar-thumb {
   margin-bottom: 10px;
 }
 
+.title {
+  font-family: 'Times New Roman', Times, serif;
+  display: table;
+  margin: auto;
+}
+
+.title h1 {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.title span {
+  font-size: x-large;
+}
+
 textarea {
   resize: none;
   border-radius: 1rem 0rem 0rem 1rem;
@@ -47,7 +62,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
 }
 
 button {
@@ -99,13 +113,12 @@ button span:hover {
 .section-content {
   position: relative;
   background-color: rgb(255, 255, 255);
-  padding: 2rem;
   min-height: 60vh;
   max-height: 80dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 58%;
+  width: 60%;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   border-radius: 0.5rem;
 }
@@ -113,6 +126,11 @@ button span:hover {
 #token-count {
   color: rgba(48, 48, 48, 0.603);
   margin: 0.5rem;
+}
+
+.prompt {
+  border-top: 1px solid gainsboro;
+  padding: 1rem;
 }
 
 .prompt_control {
@@ -127,16 +145,35 @@ button span:hover {
   word-wrap:break-word;
   padding: 1rem;
   overflow-y: scroll;
+  margin: 1rem;
 }
 
 pre {
   color: white !important;
   background-color: #282c34 !important;
-  border-radius: 0.512em;
   width: 100%;
   display: flex;
   padding: 5px;
   overflow-x: scroll;
+  margin-top: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.linguagem {
+  background-color: #282c34 !important;
+  color: white !important;
+  border-bottom: 1px solid rgb(92, 92, 92);
+  padding: 0.5rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-top: 6px;
+}
+
+.linguagem span {
+  margin-left: 1rem !important;
+  font-size: large;
 }
 
 .hljs {
@@ -159,7 +196,7 @@ ul ul {
 
 code {
   color: rgb(175, 52, 52);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   width: 100%;;
 }
@@ -174,9 +211,13 @@ p {
 }
 
 @media screen and (max-width: 668px) {
+  section {
+    padding: 0.5rem;
+  }
+
   .section-content {
     width: 100%;
-    padding: 0.75rem;
+    max-height: 80dvh;
   }
 
   span, pre, code {

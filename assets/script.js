@@ -10,9 +10,16 @@ const tokenElement = document.getElementById("token-count");
 promptElement.addEventListener("keyup", async function (e) {
   const { totalTokens } = await model.countTokens(e.target.value);
   tempTokenCount = tokenCount;
-  tokenElement.innerHTML = `Tokens: ${totalTokens + tempTokenCount}/${
+  const tokens = totalTokens + tempTokenCount
+  tokenElement.innerHTML = `Tokens: ${tokens}/${
     chatbotConfig.maxOutputTokens
   }`;
+  
+  if (tokens >= chatbotConfig.maxOutputTokens) {
+    tokenElement.style.color = 'red';
+    tokenElement.innerHTML = `Tokens: ${tokens}/${chatbotConfig.maxOutputTokens}`;
+  }
+
 });
 
 const safetySettings = [
@@ -56,11 +63,15 @@ function highlightCode(text) {
   const lines = text.split("```");
   let html = "";
   lines.forEach((linha) => {
-    if (hljs.getLanguage(linha.split("\n")[0])) {
-      const highlightedCode = hljs.highlight(linha, {
-        language: linha.split("\n")[0],
+    let linguagem = linha.split("\n")[0];
+    if (hljs.getLanguage(linguagem)) {
+      linha = linha.split("\n").filter((a) => a != linguagem).join("\n");
+      console.log(linha)
+      let codigo = hljs.highlight(linha, {
+        language: linguagem,
       }).value;
-      html += `<pre><code class="hljs">${highlightedCode}</code></pre>`;
+      html += `<div class="linguagem"><span>.${linguagem}<span></div>`;
+      html += `<pre><code class="hljs">${codigo}</code></pre>`;
     } else {
       html += markdown.toHTML(linha);
     }
@@ -71,13 +82,6 @@ function highlightCode(text) {
 async function contarTokens(prompt) {
   const { totalTokens } = await model.countTokens(prompt);
   tokenCount += totalTokens;
-  console.log(`Total de tokens: ${tokenCount}`);
-  if (tokenCount >= chatbotConfig.maxOutputTokens) {
-    tokenElement.style.color = 'red';
-    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens} * Limite máximo atingido!`;
-  } else {
-    tokenElement.innerHTML = `Tokens: ${tokenCount}/${chatbotConfig.maxOutputTokens}`;
-  }
 }
 
 document.getElementById("enviar").addEventListener("click", async () => {
@@ -115,7 +119,6 @@ document.getElementById("enviar").addEventListener("click", async () => {
       span.innerHTML = highlightCode(resposta);
       app.scrollTo(0, app.scrollHeight);
     }
-    console.log(resposta);
     fetch('http://localhost:8003/api/message', {
       method: "POST",
       headers: {
@@ -138,3 +141,5 @@ document.getElementById("prompt").addEventListener("input", () => {
     tokenCount = 0;
   }
 });
+
+
