@@ -113,8 +113,8 @@ button span:hover {
 .section-content {
   position: relative;
   background-color: rgb(255, 255, 255);
-  min-height: 60vh;
-  max-height: 80dvh;
+  min-height: 65vh;
+  max-height: 90dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
