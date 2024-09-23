@@ -119,7 +119,7 @@ document.getElementById("enviar").addEventListener("click", async () => {
       span.innerHTML = highlightCode(resposta);
       app.scrollTo(0, app.scrollHeight);
     }
-    fetch('http://localhost:8003/api/message', {
+    fetch('https://server-node-chatbot.onrender.com/api/message', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
