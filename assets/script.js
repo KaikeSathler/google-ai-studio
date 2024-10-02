@@ -109,6 +109,7 @@ document.getElementById("enviar").addEventListener("click", async () => {
   try {
     const result = await chat.sendMessageStream(prompt);
     let span = document.createElement("div");
+    span.classList.add("resposta");
     app.insertAdjacentElement("beforeend", span);
     const response = await fetch("https://api.ipify.org?format=json");
     const data = await response.json();

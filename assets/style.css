@@ -65,18 +65,15 @@ section {
 }
 
 button {
-  border: 1px solid rgb(202, 202, 202);
-  border-radius: 50%;
-  background-color: white;
+  border: 1px solid white;
   transition: all ease-in 100ms;
   padding: 0;
+  border-radius: 5px;
 }
 
 button:hover {
   background-color: rgb(191, 230, 203);
   cursor: pointer;
-  border-color: rgb(191, 230, 203);
-  
 }
 
 button span {
@@ -94,11 +91,18 @@ button span:hover {
   padding: 0.70rem 0
 }
 
+.resposta {
+  background-color: rgb(243, 243, 243);
+  padding: 0.8rem;
+  border-radius: 15px;
+  margin: 0.8rem 0;
+}
+
 .text-user-content {
-  padding: 0.70rem;
-  background-color: rgb(214, 214, 214);
+  padding: 12px 1.3rem 12px 12px;
+  background-color: rgb(191, 230, 203);
   overflow: auto;
-  border-radius: 10px 0 20px 10px;
+  border-radius: 12px 0 20px 12px;
 }
 
 .text-user-content span {
@@ -144,7 +148,7 @@ button span:hover {
   position: relative;
   color: rgb(48, 48, 48);
   word-wrap:break-word;
-  padding: 1rem;
+  padding: 0.30rem;
   overflow-y: scroll;
   margin: 1rem;
 }
