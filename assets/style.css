@@ -7,7 +7,9 @@ html,
 body {
   margin: 0;
   width: 100%;
+  height: 100vh;
   background-color: gainsboro;
+  color: #282c34;
 }
 
 textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar {
@@ -28,18 +30,38 @@ textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar-thumb {
   margin-bottom: 10px;
 }
 
-#title {
-  font-family: 'Times New Roman', Times, serif;
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+#border {
+  border: 1px solid #282c34;
+  height: 4vh;
+}
+
+nav ul {
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.8rem;
+  margin: 0;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  align-items: center;
+  justify-content: center;
+}
+
+nav li {
+  list-style: none;
   text-align: center;
 }
 
-.title h1 {
-  font-size: x-large;
-  font-weight: 600;
-}
-
-.title span {
-  font-size: x-large;
+#title {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  margin: 2px;
+  font-size: 32px;
+  color: #282c34;
 }
 
 textarea {
@@ -60,7 +82,9 @@ textarea:focus, button:focus {
 section {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 2rem;
+  position: relative;
+  height: 100dvh;
 }
 
 button {
@@ -118,7 +142,7 @@ button span:hover {
   position: relative;
   background-color: rgb(255, 255, 255);
   min-height: 65vh;
-  max-height: 92dvh;
+  max-height: 88dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -221,6 +245,28 @@ p {
   text-align: justify;
 }
 
+footer {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer span {
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 14px;
+}
+
+#copy-footer {
+  background-color: #282c34;
+  color: aliceblue;
+}
+
 .animate-warning {
   transition: all ease-in 500ms;
 }
@@ -230,13 +276,32 @@ p {
     padding: 0.5rem;
   }
 
+  #ia {
+    margin: 0.5rem;
+  }
+
   .section-content {
     width: 100%;
-    max-height: 90dvh;
   }
 
-  span, pre, code {
-    font-size: small;
+  nav span {
+    font-size: 25px;
   }
 
+  span, pre, code, p {
+    font-size: 14px;
+  }
+
+}
+
+@media screen and (max-width: 391px) {
+  .Typewriter__wrapper {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .text-assistant {
+    background-color: rgb(240, 240, 240);
+    border-radius: 0 12px 10px 20px;
+  }
 }
