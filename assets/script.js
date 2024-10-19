@@ -69,7 +69,7 @@ function highlightCode(text) {
       let codigo = hljs.highlight(linha, {
         language: linguagem,
       }).value;
-      html += `<div class="linguagem"><span>.${linguagem}<span></div>`;
+      html += `<div class="linguagem"><span>${linguagem}<span></div>`;
       html += `<pre><code class="hljs">${codigo}</code></pre>`;
     } else {
       html += markdown.toHTML(linha);
