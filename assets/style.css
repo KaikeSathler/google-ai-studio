@@ -128,6 +128,7 @@ button span:hover {
 
 .resposta {
   background-color: rgb(240, 240, 240);
+  border: 1px solid rgb(201, 201, 201);
   padding: 0.8rem;
   border-radius: 15px;
   margin: 0.8rem 0;
@@ -135,10 +136,11 @@ button span:hover {
 }
 
 .text-user-content {
-  padding: 12px 1.3rem 12px 12px;
+  padding: 12px;
   background-color: rgb(191, 230, 203);
   overflow: auto;
   border-radius: 12px 0 20px 12px;
+  border: 1px solid rgb(162, 192, 162);
 }
 
 .text-user-content span {
@@ -151,6 +153,7 @@ button span:hover {
 }
 
 .section-content {
+  padding-top: 1rem;
   position: relative;
   background-color: rgb(255, 255, 255);
   min-height: 65vh;
@@ -244,6 +247,7 @@ code {
 
 .text-assistant {
   padding: 0.8rem;
+  padding-left: 0px;
 }
 
 .Typewriter__wrapper {
@@ -251,6 +255,7 @@ code {
   border-radius: 0 12px 10px 20px;
   width: 16rem;
   padding: 0.8rem;
+  border: 1px solid rgb(201, 201, 201);
 }
 
 p {
@@ -307,14 +312,17 @@ footer span {
 
 }
 
-@media screen and (max-width: 391px) {
+@media screen and (max-width: 400px) {
   .Typewriter__wrapper {
     background-color: transparent;
     padding: 0;
+    border: none;
   }
 
   .text-assistant {
     background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(201, 201, 201);
     border-radius: 0 12px 10px 20px;
+    padding: 12px;
   }
 }
