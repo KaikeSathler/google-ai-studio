@@ -138,7 +138,6 @@ document.getElementById("enviar").addEventListener("click", async () => {
         mensagem: resposta,
         usuario: dataip,
         mensagem_user: prompt,
-        createdAt: { type: Date, default: Date.now }
       }),
     })
   } catch (error) {
