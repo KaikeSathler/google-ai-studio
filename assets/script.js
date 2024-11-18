@@ -37,6 +37,8 @@ const chatbotConfig = {
   topK: 40,
 };
 
+
+// Carrega o histórico do localStorage ou inicializa um array vazio
 function addToHistory(role, message) {
   history.push({ role: role, parts: [{ text: message }] });
   localStorage.setItem('chatHistory', JSON.stringify(history));
@@ -106,6 +108,8 @@ document.getElementById("enviar").addEventListener("click", async () => {
   }
 
   document.getElementById("prompt").value = "";
+  
+  // Adiciona a mensagem do usuário ao histórico
   addToHistory("user", prompt);
 
   app.innerHTML += `
