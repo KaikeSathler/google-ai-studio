@@ -33,7 +33,7 @@ const chatbotConfig = {
   maxOutputTokens: 8000,
   temperature: 0.9,
   topP: 0.95,
-  topK: 60,
+  topK: 40,
 };
 
 const API_KEY = "AIzaSyAdxN6IOAecPA5yHQ43vZ7u1FgQkiMNcoM";
