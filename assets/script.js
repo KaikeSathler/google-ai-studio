@@ -6,6 +6,7 @@ let tokenCount = 0;
 let tempTokenCount = 0;
 const promptElement = document.getElementById("prompt");
 const tokenElement = document.getElementById("token-count");
+let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
 
 promptElement.addEventListener("keyup", async function (e) {
   const { totalTokens } = await model.countTokens(e.target.value);
@@ -36,9 +37,15 @@ const chatbotConfig = {
   topK: 40,
 };
 
+function addToHistory(role, message) {
+  history.push({ role: role, parts: [{ text: message }] });
+  localStorage.setItem('chatHistory', JSON.stringify(history));
+}
+
 const API_KEY = "AIzaSyAdxN6IOAecPA5yHQ43vZ7u1FgQkiMNcoM";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
+  history: [],
   model: "gemini-1.5-flash",
   chatbotConfig,
   safetySettings,
@@ -88,7 +95,7 @@ document.getElementById("enviar").addEventListener("click", async () => {
   if (prompt.trim().length == 0 || prompt == undefined) {
     return;
   }
-
+  
   await contarTokens(prompt);
 
   if (tokenCount >= chatbotConfig.maxOutputTokens) {
@@ -99,6 +106,7 @@ document.getElementById("enviar").addEventListener("click", async () => {
   }
 
   document.getElementById("prompt").value = "";
+  addToHistory("user", prompt);
 
   app.innerHTML += `
     <div class="text-user"><div class="text-user-content"><span>${prompt}</span></div></div>
@@ -142,5 +150,3 @@ document.getElementById("prompt").addEventListener("input", () => {
     tokenCount = 0;
   }
 });
-
-
