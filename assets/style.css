@@ -1,21 +1,36 @@
+/* 
+  Resetando estilos padrões e configurando a tipografia global.
+  Isso aplica uma fonte padrão e ajusta o box-sizing para todas as tags.
+*/
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Isso faz com que o padding e border não aumentem o tamanho total do elemento */
 }
 
+/* 
+  Definindo estilos para os elementos html e body para remover margens e preencher toda a altura da tela.
+  Além disso, o fundo da página é definido como "gainsboro" e a cor do texto é #282c34.
+*/
 html,
 body {
   margin: 0;
   width: 100%;
   height: 100vh;
-  background-color: gainsboro;
-  color: #282c34;
+  background-color: gainsboro; /* Cor de fundo para a página */
+  color: #282c34; /* Cor do texto */
 }
 
+/* 
+  Estilizando a barra de rolagem nos elementos 'textarea' e 'ia'. A largura da barra de rolagem é definida como 12px.
+*/
 textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar {
   width: 12px;
 }
 
+/* 
+  Definindo o estilo do "thumb" (parte da barra de rolagem) nos elementos 'textarea' e 'ia'.
+  Cor de fundo, borda, arredondamento e estilo de cursor são ajustados aqui.
+*/
 textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar-thumb {
   background-color: rgb(189, 189, 189);    
   border-radius: 1rem;  
@@ -24,21 +39,33 @@ textarea::-webkit-scrollbar-thumb, #ia::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
+/* 
+  Estilo para uma classe específica '.mensagem-limite'. Define a aparência de uma mensagem de limite, incluindo peso da fonte e tamanho.
+*/
 .mensagem-limite {
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 10px;
 }
 
+/* 
+  Estilo para a barra de navegação 'nav'. Define o fundo e o estilo de borda.
+*/
 nav {
-  background-color: #282c34;
+  background-color: #282c34; /* Cor de fundo da barra de navegação */
 }
 
+/* 
+  Definindo estilo para o elemento com id '#border', configurando a altura e cor de borda.
+*/
 #border {
-  border: 1px solid #282c34;
-  height: 4vh;
+  border: 1px solid #282c34; /* Borda com a cor da navegação */
+  height: 4vh; /* Altura de 4% da altura da tela */
 }
 
+/* 
+  Estilos para a lista de navegação. Flexbox é usado para organizar os itens horizontalmente, alinhando-os ao centro e espaçando-os igualmente.
+*/
 nav ul {
   display: flex;
   padding: 0.6rem;
@@ -49,12 +76,19 @@ nav ul {
   justify-content: space-between;
 }
 
+/* 
+  Estilo para a seção que contém o nome do usuário na barra de navegação.
+  Define a exibição como flex e adiciona um espaçamento entre os itens.
+*/
 .nav-user {
   margin: 0 12px;
   display: flex;
   gap: 0.6rem;
 }
 
+/* 
+  Estilizando o texto dentro dos itens de '.nav-user'. Ao passar o mouse, a cor muda para 'darkgray'.
+*/
 .nav-user span {
   font-size: 1.6rem;
   cursor: pointer;
@@ -64,11 +98,17 @@ nav ul {
   color: darkgray;
 }
 
+/* 
+  Estilo para os itens da lista dentro de 'nav', removendo o estilo de lista padrão e centralizando o conteúdo.
+*/
 nav li {
   list-style: none;
   text-align: center;
 }
 
+/* 
+  Estilo do título dentro do 'nav'. Define a tipografia, o tamanho da fonte e a cor.
+*/
 #title {
   font-family: 'Times New Roman', Times, serif;
   text-align: center;
@@ -77,6 +117,9 @@ nav li {
   color: #ffffff;
 }
 
+/* 
+  Estilo para o 'textarea'. Define as bordas, cor de fundo, padding e remove a opção de redimensionamento.
+*/
 textarea {
   resize: none;
   border-radius: 1rem 0rem 0rem 1rem;
@@ -87,18 +130,26 @@ textarea {
   width: 100%;
 }
 
-
+/* 
+  Remove a borda de foco dos elementos 'textarea' e 'button' quando estão em foco.
+*/
 textarea:focus, button:focus {
   outline: none;
 }
 
+/* 
+  Estilos para a seção principal do conteúdo. Aqui, Flexbox é usado para centralizar o conteúdo e ajustar a altura.
+*/
 section {
   display: flex;
   justify-content: center;
   position: relative;
-  height: 100dvh;
+  height: 100dvh; /* Usa 100% da altura visível da tela */
 }
 
+/* 
+  Estilo para o botão. Configura borda, transições suaves e ajuste do padding.
+*/
 button {
   border: 1px solid white;
   transition: all ease-in 100ms;
@@ -106,11 +157,17 @@ button {
   border-radius: 5px;
 }
 
+/* 
+  Efeito hover para os botões. Quando o botão é focado, a cor de fundo muda para 'rgb(191, 230, 203)'.
+*/
 button:hover {
   background-color: rgb(191, 230, 203);
   cursor: pointer;
 }
 
+/* 
+  Estilo do texto dentro do botão. Altera a cor do texto ao passar o mouse.
+*/
 button span {
   padding: 0.5rem;
 }
@@ -119,6 +176,9 @@ button span:hover {
   color: rgb(114, 160, 127);
 }
 
+/* 
+  Estilo para as mensagens do usuário. A exibição é ajustada para flexbox e as mensagens são alinhadas à direita.
+*/
 .text-user {
   width: 100%;
   justify-content: flex-end;
@@ -126,6 +186,9 @@ button span:hover {
   padding: 0.70rem 0
 }
 
+/* 
+  Estilo para a resposta do chatbot. Inclui a cor de fundo, borda, padding e arredondamento de cantos.
+*/
 .resposta {
   background-color: rgb(240, 240, 240);
   border: 1px solid rgb(201, 201, 201);
@@ -135,6 +198,9 @@ button span:hover {
   border-radius: 0 12px 10px 20px;
 }
 
+/* 
+  Estilo para o conteúdo das mensagens do usuário. O texto é exibido com fundo e borda específicos.
+*/
 .text-user-content {
   padding: 12px;
   background-color: rgb(191, 230, 203);
@@ -143,15 +209,24 @@ button span:hover {
   border: 1px solid rgb(162, 192, 162);
 }
 
+/* 
+  Estilo para o conteúdo do 'span' dentro de 'text-user-content'. Ele garante que o texto não ultrapasse o limite e quebre palavras longas.
+*/
 .text-user-content span {
   max-width: 100%; 
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 
+/* 
+  Estilo para ícones de Material Symbols, alterando a cor do ícone.
+*/
 .material-symbols-outlined {
   color: rgb(136, 136, 136);
 }
 
+/* 
+  Estilos para a seção de conteúdo principal, incluindo o fundo branco, altura mínima e máxima, e sombreamento.
+*/
 .section-content {
   padding-top: 1rem;
   position: relative;
@@ -167,31 +242,46 @@ button span:hover {
   margin: 1rem 0 5rem;
 }
 
+/* 
+  Estilo para o contador de tokens, incluindo a cor e o espaçamento.
+*/
 #token-count {
   color: rgba(48, 48, 48, 0.603);
   margin: 0.5rem;
 }
 
+/* 
+  Estilo para a área de prompt onde o usuário interage com o chatbot.
+*/
 .prompt {
   border-top: 1px solid gainsboro;
   padding: 1rem;
 }
 
+/* 
+  Estilo para os controles do prompt. Exibe os controles (como botões) na mesma linha com espaçamento entre eles.
+*/
 .prompt_control {
   display: flex;
   flex-direction: row;
   gap: 1rem;
 }
 
+/* 
+  Estilos para o elemento '#ia', incluindo a cor de fundo, cor do texto e o comportamento de rolagem.
+*/
 #ia {
   position: relative;
   color: rgb(48, 48, 48);
-  word-wrap:break-word;
+  word-wrap: break-word;
   padding: 0.30rem;
   overflow-y: scroll;
   margin: 1rem;
 }
 
+/* 
+  Estilo para o elemento 'pre'. Define as cores de fundo e texto, além de adicionar margens e arredondamento nas bordas.
+*/
 pre {
   color: white !important;
   background-color: #282c34 !important;
@@ -205,6 +295,9 @@ pre {
   margin-bottom: 1rem;
 }
 
+/* 
+  Estilo para a classe '.linguagem'. A cor de fundo é definida e o padding é ajustado.
+*/
 .linguagem {
   background-color: #282c34 !important;
   color: white !important;
@@ -215,29 +308,43 @@ pre {
   margin-top: 6px;
 }
 
+/* 
+  Estilo para o 'span' dentro de '.linguagem'. Ajusta a margem esquerda e o tamanho da fonte.
+*/
 .linguagem span {
   margin-left: 1rem !important;
   font-size: large;
 }
 
+/* 
+  Estilo para a classe '.hljs', que inclui o arredondamento das bordas e o padding.
+*/
 .hljs {
-  border-radius:0.512em ;
+  border-radius: 0.512em;
   padding: 0.5rem;
 }
 
+/* 
+  Estilo para as listas. Define o fundo e o arredondamento das bordas.
+*/
 ul {
   background-color: rgb(231, 224, 213);
   border-radius: 0.512em;
-  padding-top:0.5rem;
-  padding-bottom:0.5rem;
-
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
+/* 
+  Estilo para listas aninhadas. Adiciona padding a elas para organização.
+*/
 ul ul {
   padding-left: 10px;
   padding-right: 5px;
 }
 
+/* 
+  Estilo para o elemento 'code', ajustando a cor, o peso da fonte e o tamanho.
+*/
 code {
   color: rgb(175, 52, 52);
   font-weight: 500;
@@ -245,11 +352,18 @@ code {
   width: 100%;
 }
 
+/* 
+  Estilo para o texto do assistente (respostas geradas). Define o padding e a exibição.
+*/
 .text-assistant {
   padding: 0.8rem;
   padding-left: 0px;
 }
 
+/* 
+  Estilo para o container com a classe '.Typewriter__wrapper'. 
+  Ajustes de fundo, padding e bordas são feitos aqui.
+*/
 .Typewriter__wrapper {
   background-color: rgb(240, 240, 240);
   border-radius: 0 12px 10px 20px;
@@ -258,11 +372,17 @@ code {
   border: 1px solid rgb(201, 201, 201);
 }
 
+/* 
+  Estilo para o elemento 'p', ajustando a margem e o alinhamento do texto.
+*/
 p {
   margin: 0;
   text-align: justify;
 }
 
+/* 
+  Estilos para o footer. Exibe o conteúdo na parte inferior da página.
+*/
 footer {
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -273,6 +393,9 @@ footer {
   width: 100%;
 }
 
+/* 
+  Estilos para o texto dentro do footer. Ajusta o alinhamento e o padding.
+*/
 footer span {
   text-align: center;
   width: 100%;
@@ -280,15 +403,25 @@ footer span {
   font-size: 14px;
 }
 
+/* 
+  Estilo específico para o footer com id '#copy-footer'. Ajusta a cor do fundo e do texto.
+*/
 #copy-footer {
   background-color: #282c34;
   color: aliceblue;
 }
 
+/* 
+  Animação para a classe '.animate-warning'. Define uma transição suave ao longo de 500ms.
+*/
 .animate-warning {
   transition: all ease-in 500ms;
 }
 
+/* 
+  Ajustes para telas pequenas, com largura de até 668px.
+  Modifica o layout e o tamanho da fonte para melhor visualização em dispositivos menores.
+*/
 @media screen and (max-width: 668px) {
   section {
     padding: 0.5rem;
@@ -309,9 +442,12 @@ footer span {
   span, pre, code, p {
     font-size: 14px;
   }
-
 }
 
+/* 
+  Ajustes adicionais para telas muito pequenas (400px de largura ou menos).
+  Remove bordas e padding extras para otimizar o layout.
+*/
 @media screen and (max-width: 400px) {
   .Typewriter__wrapper {
     background-color: transparent;
