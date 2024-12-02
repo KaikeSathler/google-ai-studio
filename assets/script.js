@@ -43,7 +43,7 @@ function addToHistory(role, message) {
   localStorage.setItem('chatHistory', JSON.stringify(history));
 }
 
-const API_KEY = "AIzaSyAdxN6IOAecPA5yHQ43vZ7u1FgQkiMNcoM";
+const API_KEY = "AIzaSyAmUOh3Mae0Ldf5s-fy-CK9Omp5bSwjFzU";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
   history,
